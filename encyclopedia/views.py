@@ -16,19 +16,19 @@ def title(request, name):
         "body": util.get_entry(name)
     })
 
-def query(request, search):
-    # awww=util.list_entries()
-    # entries=[]
-    # for str in awww:
-    #     if str.find(search)==-1:
-    #         break
-    #     else:
-    #         entries.append(str)
-    # return render(request, "encyclopedia/index.html",{
-    #     "entries": entries,
-    #     "title": f"Search Result: {search}"
-    # })
-    return HttpResponse("Hello, World!")
+def query(request):
+    awww=util.list_entries()
+    search=(request.GET).clean_data["searchs"]
+    entries=[]
+    for str in awww:
+        if str.find(search)==-1:
+            break
+        else:
+            entries.append(str)
+    return render(request, "encyclopedia/index.html",{
+        "entries": entries,
+        "title": f"Search Result: {search}"
+    })
 
 
     
